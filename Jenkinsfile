@@ -47,7 +47,7 @@ pipeline {
                 stage ('Mysql Database') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mysql/Dockerfile -t fpm:$BUILD php7-fpm/"
+                        sh "docker build -f mysql/Dockerfile -t fpm:$BUILD mysql/"
                      }
                      post {
                         success {
