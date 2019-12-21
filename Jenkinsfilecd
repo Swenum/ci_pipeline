@@ -24,7 +24,7 @@ pipeline {
                                   agent { label 'docker'}
                                   steps {
                                       sh """
-                                      docker run  -d -p 3390:3306 -e ALLOW_EMPTY_PASSWORD=yes -v /dbstore:/bitnami:rw  swenum/mysql:${BUILD_DEPLOY}
+                                      docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -v /dbstore:/bitnami/mariadb bitnami/mariadb:latest
 
                                       """
                                   }
