@@ -55,7 +55,7 @@ pipeline {
                      post {
                         success {
                                    echo 'Tag for private registry'
-                                   sh "docker tag mysql:${BUILD_NUMBER}  swenum/mysql::${BUILD_NUMBER}"
+                                   sh "docker tag mysql:${BUILD_NUMBER}  swenum/mysql:${BUILD_NUMBER}"
                         }
                      }
                  }
