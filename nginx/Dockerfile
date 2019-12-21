@@ -1,4 +1,4 @@
-FROM bitnami/nginx
+FROM swenum/nginxmy
 
 LABEL maintainer="Uladzimir Schuka <wetoster@gmail.com>"
 
