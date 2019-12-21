@@ -10,5 +10,3 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 EXPOSE 80
 
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["nginx"]
