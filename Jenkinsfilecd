@@ -5,16 +5,21 @@ pipeline {
                         agent { label 'docker'}
                         steps {
                             sh """
-                            docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app  -v  /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:7
+                            docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app  -v  /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:${BUILD_DEPLOY}
                             """
                         }
-                        post {
-                            success {
-                                echo 'Tag for private registry'
-                                sh "docker tag nginx:${BUILD_NUMBER} swenum/nginx:${BUILD_DEPLOY}"
-                            }
-                        }
+
+          }
+          stage ('Docker Start php-fpm') {
+                                  agent { label 'docker'}
+                                  steps {
+                                      sh """
+                                      docker run  -p 9000:9000 -v /www:/app  swenum/fpm:${BUILD_DEPLOY}
+                                      """
+                                  }
+
                     }
+
 
     }
 }
