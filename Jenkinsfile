@@ -38,7 +38,9 @@ pipeline {
                 stage ('Build image with PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php/Dockerfile -t php-fpm:${BUILD_NUMBER} php/"
+                        sh """
+                        docker build -f php/Dockerfile -t php-fpm:${BUILD_NUMBER} php/
+                        """
                     }
                     post {
                         success {
