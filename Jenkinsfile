@@ -23,7 +23,10 @@ pipeline {
                 stage ('Wodpress Nginx'){
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f nginx/Dockerfile -t nginx:$BUILD nginx/"
+                        sh """
+                        pwd
+                        docker build -f nginx/Dockerfile -t nginx:$BUILD nginx/
+                        """
                     }
                     post {
                         success {
