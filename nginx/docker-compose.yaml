@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nginx:
-    build: .
+    image: 'swenum/nginx:35'
     ports:
       - '8081:80'
       
@@ -11,7 +11,7 @@ services:
       - ./conf/wordpress.swn.by:/etc/nginx/sites-enabled/wordpress.swn.by.conf:ro
       - ./logs:/opt/bitnami/nginx/logs:rw
   php:
-    build: ../php/
+    image: 'swenum/fpm:35'
     ports:
       - '9000:9000'
       
