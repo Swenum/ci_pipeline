@@ -20,25 +20,25 @@ pipeline {
                 }
         stage ('Docker build Nginx Php-Fpm') {
             parallel {
-                stage ('Wodpress Nginx'){
+                stage ('Build image whit Nginx'){
                     agent { label 'docker'}
                     steps {
                         sh """
                         pwd
-                        docker build -f nginx/Dockerfile -t nginx:$BUILD nginx/
+                        docker build -f nginx/Dockerfile -t nginx nginx/
                         """
                     }
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag  swenum/nginx:$BUILD"
+                            sh "docker tag  swenum/nginx"
                         }
                     }
                 }
-                stage ('Wordpress PHP-FPM') {
+                stage ('Build image with PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php7-fpm/Dockerfile -t fpm:$BUILD php/"
+                        sh "docker build -f php7-fpm/Dockerfile -t fpm php/"
                     }
                     post {
                         success {
@@ -47,7 +47,7 @@ pipeline {
                         }
                     }
                 }
-                stage ('Mysql Database') {
+                stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
                         sh "docker build -f mysql/Dockerfile -t mysql:$BUILD mysql/"
