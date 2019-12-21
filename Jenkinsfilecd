@@ -1,0 +1,1 @@
+ docker run  docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app -v /docker/ci_pipeline/nginx/www:/app -v  ./conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:41
