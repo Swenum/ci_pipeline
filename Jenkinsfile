@@ -43,7 +43,7 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag php-fpm::${BUILD_NUMBER}  swenum/fpm:${BUILD_NUMBER}"
+                            sh "docker tag php-fpm:${BUILD_NUMBER}  swenum/fpm:${BUILD_NUMBER}"
                         }
                     }
                 }
