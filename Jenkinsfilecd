@@ -1,6 +1,7 @@
 pipeline {
     agent any
-    stage ('Docker Start Nginx') {
+    stages {
+         stage ('Docker Start Nginx') {
                         agent { label 'docker'}
                         steps {
                             sh """
@@ -10,10 +11,10 @@ pipeline {
                         post {
                             success {
                                 echo 'Tag for private registry'
-                                sh "docker tag nginx:${BUILD_NUMBER} swenum/nginx:${BUILD_NUMBER}"
+                                sh "docker tag nginx:${BUILD_NUMBER} swenum/nginx:${BUILD_DEPLOY}"
                             }
                         }
                     }
 
-
+    }
 }
