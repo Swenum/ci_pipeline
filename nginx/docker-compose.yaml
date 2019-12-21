@@ -7,9 +7,9 @@ services:
       - '8081:80'
       
     volumes:
-      - ./www:/app
+      - ./www:/var/www/html
       - ./conf/wordpress.swn.by:/etc/nginx/sites-enabled/wordpress.swn.by.conf:ro
-      - ./logs:/opt/bitnami/nginx/logs:rw
+
   php:
     image: 'swenum/fpm:35'
     ports:
