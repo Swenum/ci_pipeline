@@ -31,7 +31,7 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag nginx swenum/nginx"
+                            sh "docker tag nginx:${BUILD_NUMBER} swenum/nginx:${BUILD_NUMBER}"
                         }
                     }
                 }
@@ -43,7 +43,7 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag php-fpm  swenum/fpm"
+                            sh "docker tag php-fpm::${BUILD_NUMBER}  swenum/fpm:${BUILD_NUMBER}"
                         }
                     }
                 }
@@ -55,7 +55,7 @@ pipeline {
                      post {
                         success {
                                    echo 'Tag for private registry'
-                                   sh "docker tag mysql swenum/mysql"
+                                   sh "docker tag mysql:${BUILD_NUMBER}  swenum/mysql::${BUILD_NUMBER}"
                         }
                      }
                  }
