@@ -31,7 +31,7 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag  swenum/nginx"
+                            sh "docker tag nginx swenum/nginx"
                         }
                     }
                 }
@@ -43,19 +43,19 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag swenum/fpm:$BUILD"
+                            sh "docker tag fpm  swenum/fpm"
                         }
                     }
                 }
                 stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mysql/Dockerfile -t mysql:$BUILD mysql/"
+                        sh "docker build -f mysql/Dockerfile -t mysql mysql/"
                      }
                      post {
                         success {
                                    echo 'Tag for private registry'
-                                   sh "docker tag swenum/mysql:$BUILD"
+                                   sh "docker tag mysql swenum/mysql"
                         }
                      }
                  }
