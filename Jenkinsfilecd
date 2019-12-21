@@ -1,1 +1,19 @@
- docker run  docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app -v /docker/ci_pipeline/nginx/www:/app -v  ./conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:41
+pipeline {
+    agent any
+    stage ('Docker Start Nginx') {
+                        agent { label 'docker'}
+                        steps {
+                            sh """
+                            docker run  docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app -v /docker/ci_pipeline/nginx/www:/app -v  ./conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:41
+                            """
+                        }
+                        post {
+                            success {
+                                echo 'Tag for private registry'
+                                sh "docker tag nginx:${BUILD_NUMBER} swenum/nginx:${BUILD_NUMBER}"
+                            }
+                        }
+                    }
+
+
+}
