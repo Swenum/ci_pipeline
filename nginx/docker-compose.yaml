@@ -19,10 +19,8 @@ services:
       - ./www:/var/www/html
   mariadb:
     image: 'swenum/mysql:35'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - ../mariadb/data:/var/lib/mysql:rw
+      - ./data:/var/lib/mysql:rw
     ports:
       - '3306:3306'
       
