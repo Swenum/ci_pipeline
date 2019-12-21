@@ -15,7 +15,7 @@ pipeline {
                                  credentialsId: 'Github_Repo_Swenum',
                                  branch: "master"
                              )
-                    sh 'printenv'
+                    #sh 'printenv'
                     }
                 }
         stage ('Docker build Nginx Php-Fpm') {
