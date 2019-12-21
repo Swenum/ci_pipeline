@@ -1,23 +1,14 @@
-FROM nginx:stable
+FROM bitnami/nginx
 
 LABEL maintainer="Uladzimir Schuka <wetoster@gmail.com>"
 
-RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
-    openssl \
-    certbot \
-    netcat
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN rm -f /etc/nginx/conf.d/default.conf
-RUN rm -f /etc/nginx/conf.d/example_ssl.conf
+#COPY ./nginx.conf /etc/nginx/nginx.conf
+#COPY ./wordpress.conf /etc/nginx/conf.d/wordpress.conf
+#COPY ./index.html /var/www/html/index.html
+EXPOSE 80
 
-COPY    ./conf/wordpress.swn.by /etc/nginx/sites-enabled/wordpress.swn.by
-#COPY nginx.conf /etc/nginx/nginx.conf
-COPY docker-entrypoint.sh /
-RUN chmod +x docker-entrypoint.sh
-
-EXPOSE 80 443
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx"]

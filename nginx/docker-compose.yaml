@@ -3,18 +3,15 @@ version: '2'
 services:
   nginx:
     image: 'swenum/nginx:35'
-    ports:
-      - '8081:80'
-      
     volumes:
+      - ./conf:/etc/nginx/conf.d/wordpress.swn.by
       - ./www:/var/www/html
-      - ./conf/wordpress.swn.by:/etc/nginx/sites-enabled/wordpress.swn.by.conf:ro
-
+    ports:
+        - '8089:80'
   php:
     image: 'swenum/fpm:35'
     ports:
       - '9000:9000'
-      
     volumes:
       - ./www:/var/www/html
   mariadb:
