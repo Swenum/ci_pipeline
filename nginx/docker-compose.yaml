@@ -2,20 +2,20 @@ version: '2'
 
 services:
   nginx:
-    image: 'swenum/nginx:41'
+    image: 'swenum/nginx:44'
     volumes:
       - ./conf/wordpress.swn.by:/etc/nginx/conf.d/wordpress.swn.by.conf:ro
       - ./www:/app
     ports:
         - '8089:80'
   php:
-    image: 'swenum/fpm:41'
+    image: 'swenum/fpm:44'
     ports:
       - '9000:9000'
     volumes:
       - ./www:/var/www/html
   mariadb:
-    image: 'swenum/mysql:41'
+    image: 'swenum/mysql:44'
     volumes:
       - ./data:/var/lib/mysql:rw
     ports:
