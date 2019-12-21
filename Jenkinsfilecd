@@ -5,7 +5,7 @@ pipeline {
                         agent { label 'docker'}
                         steps {
                             sh """
-                            docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app  -v  /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:${BUILD_DEPLOY}
+                            docker run -d -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app  -v  /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:${BUILD_DEPLOY}
                             """
                         }
 
@@ -14,7 +14,7 @@ pipeline {
                                   agent { label 'docker'}
                                   steps {
                                       sh """
-                                      docker run  -p 9000:9000 -v /www:/app  swenum/fpm:${BUILD_DEPLOY}
+                                      docker run  -d -p 9000:9000 -v /www:/app  swenum/fpm:${BUILD_DEPLOY}
                                       """
                                   }
 
