@@ -5,6 +5,7 @@ pipeline {
     }
          stages {
                 stage('Clone repository') {
+                    agent { label 'docker'}
                     steps {
                        script {
                                 COMMIT = "${GIT_COMMIT.substring(0,8)}"
