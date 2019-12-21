@@ -43,14 +43,18 @@ pipeline {
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag php-fpm:${BUILD_NUMBER}  swenum/fpm:${BUILD_NUMBER}"
+                            sh """
+                            docker tag php-fpm:${BUILD_NUMBER}  swenum/fpm:${BUILD_NUMBER}
+                            """
                         }
                     }
                 }
                 stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mariadb/Dockerfile -t mysql:${BUILD_NUMBER} mariadb/"
+                        sh """
+                        docker build -f mariadb/Dockerfile -t mysql:${BUILD_NUMBER} mariadb/
+                        """
                      }
                      post {
                         success {
