@@ -4,8 +4,8 @@ services:
   nginx:
     image: 'swenum/nginx:41'
     volumes:
-      - ./conf:/etc/nginx/conf.d/wordpress.swn.by
-      - ./www:/var/www/html
+      - ./conf/wordpress.swn.by:/etc/nginx/conf.d/wordpress.swn.by.conf:ro
+      - ./www:/app
     ports:
         - '8089:80'
   php:
