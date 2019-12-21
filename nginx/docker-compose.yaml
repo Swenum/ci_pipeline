@@ -8,7 +8,7 @@ services:
       
     volumes:
       - ./www:/app
-      - ./conf/wordpress.minedy.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.minedy.by.conf:ro
+      - ./conf/wordpress.swn.by:/etc/nginx/sites-enabled/wordpress.swn.by.conf:ro
       - ./logs:/opt/bitnami/nginx/logs:rw
   php:
     build: ../php/
@@ -16,13 +16,13 @@ services:
       - '9000:9000'
       
     volumes:
-      - ./www:/app
+      - ./www:/var/www/html
   mariadb:
-    image: 'bitnami/mariadb:latest'
+    image: 'swenum/mysql'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /home/jenkins/ci-cd-project/dbstore:/bitnami:rw
+      - ../mariadb/data:/var/lib/mysql:rw
     ports:
       - '3306:3306'
       
