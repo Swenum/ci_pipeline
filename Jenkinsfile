@@ -25,7 +25,7 @@ pipeline {
                     steps {
                         sh """
                         pwd
-                        docker build -f nginx/Dockerfile -t nginx nginx/
+                        docker build -f nginx/Dockerfile -t nginx:${BUILD_NUMBER} nginx/
                         """
                     }
                     post {
@@ -38,7 +38,7 @@ pipeline {
                 stage ('Build image with PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php/Dockerfile -t php-fpm php/"
+                        sh "docker build -f php/Dockerfile -t php-fpm:${BUILD_NUMBER} php/"
                     }
                     post {
                         success {
@@ -50,7 +50,7 @@ pipeline {
                 stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mariadb/Dockerfile -t mysql mariadb/"
+                        sh "docker build -f mariadb/Dockerfile -t mysql:${BUILD_NUMBER} mariadb/"
                      }
                      post {
                         success {
