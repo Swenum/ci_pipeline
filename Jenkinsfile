@@ -50,7 +50,7 @@ pipeline {
                 stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mysql/Dockerfile -t mysql mysql/"
+                        sh "docker build -f mysql/Dockerfile -t mysql mariadb/"
                      }
                      post {
                         success {
