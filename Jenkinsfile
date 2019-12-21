@@ -5,7 +5,6 @@ pipeline {
     }
          stages {
                 stage('Clone repository') {
-                    agent { label 'docker'}
                     steps {
                        script {
                                 COMMIT = "${GIT_COMMIT.substring(0,8)}"
@@ -21,39 +20,42 @@ pipeline {
                 }
         stage ('Docker build Nginx Php-Fpm') {
             parallel {
-                stage ('Wodpress Nginx'){
+                stage ('Build image whit Nginx'){
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f nginx/Dockerfile -t nginx:$BUILD nginx/"
+                        sh """
+                        pwd
+                        docker build -f nginx/Dockerfile -t nginx:${BUILD_NUMBER} nginx/
+                        """
                     }
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag  swenum/nginx:$BUILD"
+                            sh "docker tag nginx swenum/nginx"
                         }
                     }
                 }
-                stage ('Wordpress PHP-FPM') {
+                stage ('Build image with PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php7-fpm/Dockerfile -t fpm:$BUILD php7-fpm/"
+                        sh "docker build -f php/Dockerfile -t php-fpm:${BUILD_NUMBER} php/"
                     }
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag swenum/fpm:$BUILD"
+                            sh "docker tag php-fpm  swenum/fpm"
                         }
                     }
                 }
-                stage ('Mysql Database') {
+                stage ('Build image with mysql') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mysql/Dockerfile -t fpm:$BUILD mysql/"
+                        sh "docker build -f mariadb/Dockerfile -t mysql:${BUILD_NUMBER} mariadb/"
                      }
                      post {
                         success {
                                    echo 'Tag for private registry'
-                                   sh "docker tag swenum/mysql:$BUILD"
+                                   sh "docker tag mysql swenum/mysql"
                         }
                      }
                  }
