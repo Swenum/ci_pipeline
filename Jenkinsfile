@@ -38,12 +38,12 @@ pipeline {
                 stage ('Build image with PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php7-fpm/Dockerfile -t fpm php/"
+                        sh "docker build -f php/Dockerfile -t php-fpm php/"
                     }
                     post {
                         success {
                             echo 'Tag for private registry'
-                            sh "docker tag fpm  swenum/fpm"
+                            sh "docker tag php-fpm  swenum/fpm"
                         }
                     }
                 }
