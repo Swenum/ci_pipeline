@@ -4,8 +4,8 @@ services:
   nginx:
     image: 'swenum/nginx:44'
     volumes:
-      - ./conf/wordpress.swn.by:/etc/nginx/conf.d/wordpress.swn.by.conf:ro
-      - ./www:/app
+      - /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro
+      - /docker/ci_pipeline/nginx/www:/app
     ports:
         - '8089:80'
   php:
@@ -20,4 +20,6 @@ services:
       - ./data:/var/lib/mysql:rw
     ports:
       - '3336:3306'
+
+# docker run  -p 8057:80 -v /docker/ci_pipeline/nginx/www:/app -v /docker/ci_pipeline/nginx/www:/app   -v /docker/ci_pipeline/nginx/conf/wordpress.swn.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.swn.by.conf:ro       swenum/nginx:44
       
