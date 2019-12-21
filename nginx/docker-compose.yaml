@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  nginx:
+    build: .
+    ports:
+      - '8081:8080'
+      
+    volumes:
+      - ./www:/app
+      - ./conf/wordpress.minedy.by:/opt/bitnami/nginx/conf/server_blocks/wordpress.minedy.by.conf:ro
+      - ./logs:/opt/bitnami/nginx/logs:rw
+  php:
+    build: ../php/
+    ports:
+      - '9000:9000'
+      
+    volumes:
+      - ./www:/app
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - /home/jenkins/ci-cd-project/dbstore:/bitnami:rw
+    ports:
+      - '3306:3306'
+      

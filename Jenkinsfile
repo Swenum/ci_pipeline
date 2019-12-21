@@ -35,7 +35,7 @@ pipeline {
                 stage ('Wordpress PHP-FPM') {
                     agent { label 'docker'}
                     steps {
-                        sh "docker build -f php7-fpm/Dockerfile -t fpm:$BUILD php7-fpm/"
+                        sh "docker build -f php7-fpm/Dockerfile -t fpm:$BUILD php/"
                     }
                     post {
                         success {
@@ -47,7 +47,7 @@ pipeline {
                 stage ('Mysql Database') {
                      agent { label 'docker'}
                      steps {
-                        sh "docker build -f mysql/Dockerfile -t fpm:$BUILD php7-fpm/"
+                        sh "docker build -f mysql/Dockerfile -t mysql:$BUILD mysql/"
                      }
                      post {
                         success {
